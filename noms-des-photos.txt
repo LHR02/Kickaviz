@@ -1,0 +1,112 @@
+KICKAVIZ - noms des fichiers photo
+
+Cree un dossier 'photos' dans ton depot GitHub et mets-y une image .jpg par joueur, avec EXACTEMENT ces noms.
+Utilise uniquement des images dont tu as le droit de te servir (par exemple des photos libres de droits sur Wikimedia Commons).
+Si une photo manque, la carte affiche une silhouette.
+
+achraf-hakimi.jpg   <- Achraf Hakimi
+adrien-rabiot.jpg   <- Adrien Rabiot
+alexandre-lacazette.jpg   <- Alexandre Lacazette
+alisson.jpg   <- Alisson
+alphonso-davies.jpg   <- Alphonso Davies
+andres-iniesta.jpg   <- Andrés Iniesta
+andy-delort.jpg   <- Andy Delort
+andy-robertson.jpg   <- Andy Robertson
+antonio-rudiger.jpg   <- Antonio Rüdiger
+arjen-robben.jpg   <- Arjen Robben
+ashley-cole.jpg   <- Ashley Cole
+benjamin-pavard.jpg   <- Benjamin Pavard
+bruno-fernandes.jpg   <- Bruno Fernandes
+bukayo-saka.jpg   <- Bukayo Saka
+cafu.jpg   <- Cafu
+casemiro.jpg   <- Casemiro
+christian-eriksen.jpg   <- Christian Eriksen
+claude-makelele.jpg   <- Claude Makelélé
+cristiano-ronaldo.jpg   <- Cristiano Ronaldo
+dani-alves.jpg   <- Dani Alves
+declan-rice.jpg   <- Declan Rice
+didier-drogba.jpg   <- Didier Drogba
+djibril-sidibe.jpg   <- Djibril Sidibé
+dusan-vlahovic.jpg   <- Dušan Vlahović
+ederson.jpg   <- Ederson
+erling-haaland.jpg   <- Erling Haaland
+fabinho.jpg   <- Fabinho
+federico-valverde.jpg   <- Federico Valverde
+ferland-mendy.jpg   <- Ferland Mendy
+franck-kessie.jpg   <- Franck Kessié
+franz-beckenbauer.jpg   <- Franz Beckenbauer
+frenkie-de-jong.jpg   <- Frenkie de Jong
+gerd-muller.jpg   <- Gerd Müller
+gianluigi-buffon.jpg   <- Gianluigi Buffon
+hakim-ziyech.jpg   <- Hakim Ziyech
+harry-kane.jpg   <- Harry Kane
+hugo-lloris.jpg   <- Hugo Lloris
+idrissa-gueye.jpg   <- Idrissa Gueye
+iker-casillas.jpg   <- Iker Casillas
+jamal-musiala.jpg   <- Jamal Musiala
+jordi-alba.jpg   <- Jordi Alba
+jude-bellingham.jpg   <- Jude Bellingham
+jules-kounde.jpg   <- Jules Koundé
+kalidou-koulibaly.jpg   <- Kalidou Koulibaly
+karim-benzema.jpg   <- Karim Benzema
+kevin-de-bruyne.jpg   <- Kevin De Bruyne
+kingsley-coman.jpg   <- Kingsley Coman
+kyle-walker.jpg   <- Kyle Walker
+kylian-mbappe.jpg   <- Kylian Mbappé
+lamine-yamal.jpg   <- Lamine Yamal
+lautaro-martinez.jpg   <- Lautaro Martínez
+leroy-sane.jpg   <- Leroy Sané
+lilian-thuram.jpg   <- Lilian Thuram
+lionel-messi.jpg   <- Lionel Messi
+lucas-digne.jpg   <- Lucas Digne
+luis-figo.jpg   <- Luís Figo
+luka-modric.jpg   <- Luka Modrić
+manuel-neuer.jpg   <- Manuel Neuer
+marcelo.jpg   <- Marcelo
+marquinhos.jpg   <- Marquinhos
+martin-degaard.jpg   <- Martin Ødegaard
+mike-maignan.jpg   <- Mike Maignan
+mohamed-salah.jpg   <- Mohamed Salah
+moussa-dembele.jpg   <- Moussa Dembélé
+n-golo-kante.jpg   <- N’Golo Kanté
+neymar.jpg   <- Neymar
+nuno-mendes.jpg   <- Nuno Mendes
+olivier-giroud.jpg   <- Olivier Giroud
+ousmane-dembele.jpg   <- Ousmane Dembélé
+paolo-maldini.jpg   <- Paolo Maldini
+patrick-vieira.jpg   <- Patrick Vieira
+pedri.jpg   <- Pedri
+pele.jpg   <- Pelé
+presnel-kimpembe.jpg   <- Presnel Kimpembe
+rafael-leao.jpg   <- Rafael Leão
+raphinha.jpg   <- Raphinha
+reece-james.jpg   <- Reece James
+riyad-mahrez.jpg   <- Riyad Mahrez
+robert-lewandowski.jpg   <- Robert Lewandowski
+roberto-carlos.jpg   <- Roberto Carlos
+rodri.jpg   <- Rodri
+ronaldinho.jpg   <- Ronaldinho
+ronaldo-nazario.jpg   <- Ronaldo Nazário
+ruben-dias.jpg   <- Rúben Dias
+ryan-giggs.jpg   <- Ryan Giggs
+samuel-umtiti.jpg   <- Samuel Umtiti
+serge-gnabry.jpg   <- Serge Gnabry
+sergio-busquets.jpg   <- Sergio Busquets
+sergio-ramos.jpg   <- Sergio Ramos
+son-heung-min.jpg   <- Son Heung-min
+steve-mandanda.jpg   <- Steve Mandanda
+steven-gerrard.jpg   <- Steven Gerrard
+steven-nzonzi.jpg   <- Steven Nzonzi
+theo-hernandez.jpg   <- Theo Hernández
+thibaut-courtois.jpg   <- Thibaut Courtois
+thierry-henry.jpg   <- Thierry Henry
+toni-kroos.jpg   <- Toni Kroos
+trent-alexander-arnold.jpg   <- Trent Alexander-Arnold
+victor-osimhen.jpg   <- Victor Osimhen
+vinicius-junior.jpg   <- Vinícius Júnior
+virgil-van-dijk.jpg   <- Virgil van Dijk
+wissam-ben-yedder.jpg   <- Wissam Ben Yedder
+wojciech-szczesny.jpg   <- Wojciech Szczęsny
+xavi.jpg   <- Xavi
+zinedine-zidane.jpg   <- Zinedine Zidane
+zlatan-ibrahimovic.jpg   <- Zlatan Ibrahimović
