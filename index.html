@@ -270,6 +270,192 @@ html[data-calm] *,html[data-calm] *::before,html[data-calm] *::after{animation:n
 .fph .stars{position:absolute;right:8px;bottom:8px;z-index:3;font-size:.8rem;letter-spacing:1px;text-shadow:0 0 8px rgba(var(--gl),1)}
 @media (prefers-reduced-motion:reduce){.packb,.beams i,.halo,.nova,.flr,.tw{animation:none!important}.nova{display:none}}
 .pkmu{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:14px;z-index:6;background:rgba(255,255,255,.14);color:#fff;border:0;border-radius:20px;padding:8px 14px}
+
+/* =====================================================================
+   V6 : ANIMATIONS PLUS BELLES
+   (bloc ajouté : n'écrase rien, redéfinit seulement quelques @keyframes)
+   ===================================================================== */
+
+/* --- transitions de thème douces --- */
+body{transition:background-color .45s ease,color .45s ease}
+.card,.qc,.seg button,#bar,#dock,.sh,.hint{transition:background-color .45s ease,border-color .35s ease,color .45s ease,box-shadow .3s ease,translate .3s cubic-bezier(.2,.9,.3,1),scale .15s ease}
+
+/* --- entrée des écrans : tout arrive en cascade --- */
+@keyframes viewIn{from{opacity:0;translate:0 22px;scale:.985}}
+#app>*:not(.pc):not(.hero):not(.ttl){animation:viewIn .6s cubic-bezier(.2,.9,.3,1) backwards;animation-delay:calc(var(--i,0)*55ms)}
+@keyframes heroIn{from{opacity:0;translate:0 26px;scale:.96}}
+.hero{animation:heroIn .85s cubic-bezier(.2,.9,.3,1) backwards}
+
+/* --- HERO : projecteurs, pelouse qui défile, titre brillant, ballon qui rebondit --- */
+@keyframes flood{from{transform:rotate(-9deg) scale(1.25);opacity:.55}to{transform:rotate(9deg) scale(1.25);opacity:1}}
+.hero::before{content:"";position:absolute;inset:-30% -10% 0;z-index:0;pointer-events:none;mix-blend-mode:screen;transform-origin:50% 0;background:conic-gradient(from 195deg at 50% 0,transparent 0 8%,rgba(255,255,255,.2) 12%,transparent 17% 40%,rgba(255,255,255,.16) 45%,transparent 50% 100%);animation:flood 7s ease-in-out infinite alternate}
+@keyframes grass{to{background-position:64px 0}}
+.hero::after{animation:grass 5s linear infinite}
+@keyframes bnc{0%,100%{transform:translateY(5px) scale(1.2,.8) rotate(0deg);animation-timing-function:cubic-bezier(.15,.75,.3,1)}
+ 48%{transform:translateY(-22px) scale(.95,1.07) rotate(190deg);animation-timing-function:ease-in}
+ 52%{transform:translateY(-22px) scale(.95,1.07) rotate(215deg);animation-timing-function:cubic-bezier(.7,0,.85,.3)}
+ 94%{transform:translateY(0) scale(1,1) rotate(360deg)}}
+.hero .ball{filter:drop-shadow(0 10px 8px rgba(0,0,0,.35))}
+@keyframes ttlShine{to{background-position:-250% 0}}
+.hero h1{text-shadow:none;color:transparent;background:linear-gradient(100deg,#fff 0 38%,color-mix(in srgb,var(--ac) 35%,#fff) 46%,#fff 54% 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 16px color-mix(in srgb,var(--ac) 70%,transparent));animation:ttlShine 4.5s linear infinite}
+@keyframes chipIn{from{opacity:0;translate:0 14px;scale:.7}}
+.hero .chips span{animation:chipIn .6s cubic-bezier(.2,1.5,.4,1) backwards;backdrop-filter:blur(4px)}
+@keyframes txIn2{from{opacity:0;translate:0 12px}}
+.hero .tg,.hero p{animation:txIn2 .7s .35s backwards}
+.cta{position:relative;overflow:hidden}
+@keyframes ctaShine{0%,55%{translate:-130% 0}100%{translate:130% 0}}
+.cta::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.9) 50%,transparent 65%);mix-blend-mode:soft-light;animation:ctaShine 3.4s 1.2s ease-in-out infinite}
+
+/* --- boutons : relief, reflet, rebond au clic, ondulation --- */
+.btn,.qb,.seg button,#bar button,.lkr{position:relative;overflow:hidden}
+.btn,.cta{transition:translate .2s cubic-bezier(.2,.9,.3,1),box-shadow .25s,filter .2s,scale .12s ease}
+.btn:not([disabled]):active,.cta:active{scale:.95}
+.btn:not(.o):not([disabled])::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);translate:-130% 0;transition:translate .7s ease}
+@media (hover:hover){
+ .btn:not([disabled]):hover,.cta:hover{translate:0 -2px;box-shadow:0 10px 22px color-mix(in srgb,var(--ac) 35%,transparent)}
+ .btn:not(.o):not([disabled]):hover::after{translate:130% 0}
+ .seg button:hover{translate:0 -2px;border-color:color-mix(in srgb,var(--ac) 60%,var(--bd))}
+ .card:hover{box-shadow:0 10px 26px rgba(0,0,0,.12)}
+}
+.rpl{position:absolute;border-radius:50%;background:currentColor;opacity:.22;pointer-events:none;scale:0;animation:rpl .65s ease-out forwards}
+@keyframes rpl{to{scale:1;opacity:0}}
+#bar b{transition:scale .2s}#bar b:active{scale:.93}
+@keyframes selPop{40%{scale:1.07}}
+.seg button.on{animation:selPop .4s cubic-bezier(.2,1.5,.4,1)}
+
+/* --- terrain tactique de l'accueil : joueurs qui apparaissent, poste choisi qui pulse --- */
+@keyframes dotIn{from{scale:0;opacity:0}}
+.tac .dot{animation:dotIn .55s cubic-bezier(.2,1.6,.4,1) backwards;transition:transform .15s,scale .2s,background-color .2s,box-shadow .2s}
+@keyframes dotPulse{0%{box-shadow:0 0 0 5px rgba(245,179,1,.6),0 5px 12px rgba(0,0,0,.4)}100%{box-shadow:0 0 0 22px rgba(245,179,1,0),0 5px 12px rgba(0,0,0,.4)}}
+.tac .dot.on{animation:dotPulse 1.6s ease-out infinite}
+@media (hover:hover){.tac .dot:not(.on):hover{scale:1.12}}
+
+/* --- schéma de la question : terrain animé (joueurs, ballon, flèches) --- */
+@keyframes pitchIn{from{opacity:0;translate:0 14px;scale:.97}}
+svg.pitch{animation:pitchIn .7s cubic-bezier(.2,.9,.3,1) backwards}
+@keyframes plPop{from{transform:scale(0);opacity:0}}
+.pitch .pl>*{transform-box:fill-box;transform-origin:50% 50%;animation:plPop .55s cubic-bezier(.2,1.6,.4,1) backwards;animation-delay:var(--d,0ms)}
+@keyframes ants{to{stroke-dashoffset:-2.8}}
+.pitch line[stroke-dasharray]{animation:ants 1.2s linear infinite}
+@keyframes pring{from{transform:scale(1);opacity:.95}to{transform:scale(3.6);opacity:0}}
+.pitch .pring{fill:none;stroke:#f5b301;stroke-width:.5;transform-box:fill-box;transform-origin:center;animation:pring 1.8s ease-out infinite}
+
+/* --- quiz : barre de progression, réponses QCM, retours --- */
+.prog i{background:linear-gradient(90deg,var(--ac),color-mix(in srgb,var(--ac) 55%,#fff),var(--ac));background-size:200% 100%;animation:prgShine 2s linear infinite;transition:width .6s cubic-bezier(.2,.8,.2,1)}
+@keyframes prgShine{to{background-position:-200% 0}}
+@keyframes tlPop{from{scale:.5 .3;opacity:.3}}
+.tl i.g:has(+ i.c),.tl i.o:has(+ i.c),.tl i.r:has(+ i.c){animation:tlPop .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes tlCur{50%{outline-color:var(--ac);outline-offset:2px}}
+.tl i.c{animation:tlCur 1.4s ease-in-out infinite}
+.tl i{transition:background-color .4s}
+@keyframes qbIn{from{opacity:0;translate:-18px 0;scale:.96}}
+.qo .qb:not(.qy):not(.qn){animation:qbIn .5s cubic-bezier(.2,.9,.3,1.15) backwards}
+.qb{transition:transform .12s,border-color .25s,background-color .25s,box-shadow .3s,scale .15s,translate .2s}
+@keyframes qyp{0%{scale:1}35%{scale:1.06}65%{scale:.99}100%{scale:1}}
+.qb.qy{box-shadow:0 0 0 4px rgba(22,163,74,.22),0 10px 26px rgba(22,163,74,.35)}
+.qb.qn{box-shadow:0 0 0 4px rgba(220,38,38,.18)}
+@media (hover:hover){.qb:not(:disabled):hover{border-color:var(--ac);translate:4px 0}}
+@keyframes fxIn{0%{transform:translateX(-50%) translateY(-36px) scale(.5);opacity:0}14%{transform:translateX(-50%) translateY(4px) scale(1.15);opacity:1}24%{transform:translateX(-50%) scale(.97)}32%{transform:translateX(-50%) scale(1)}82%{opacity:1;transform:translateX(-50%)}100%{transform:translateX(-50%) translateY(-14px) scale(.95);opacity:0}}
+.fx.g{box-shadow:0 10px 30px rgba(22,163,74,.5),0 0 44px rgba(101,163,13,.45)}
+.fx.m{box-shadow:0 10px 30px rgba(217,119,6,.45)}
+@keyframes fxc{0%{transform:translate(0,0) rotate(0) scale(.5);opacity:1}35%{transform:translate(calc(var(--x)*.85),calc(var(--y)*.85)) rotate(calc(var(--r)*.5)) scale(1.1);opacity:1}100%{transform:translate(var(--x),calc(var(--y) + 170px)) rotate(var(--r)) scale(.7);opacity:0}}
+.fxc:nth-child(3n){border-radius:50%;width:9px;height:9px}.fxc:nth-child(4n){width:5px;height:16px}
+
+/* --- barres de stats : elles se remplissent --- */
+@keyframes barGrow{from{width:0}}
+.bar i{animation:barGrow 1.1s cubic-bezier(.2,.8,.2,1) backwards}
+@keyframes barUp{from{transform:scaleY(0)}}
+.bars i{transform-origin:bottom;animation:barUp .8s cubic-bezier(.2,1.2,.4,1) backwards}
+
+/* --- menu (vestiaire) et fiches (sheet) --- */
+@keyframes fadeIn{from{opacity:0}}
+@keyframes sheetUp{from{translate:0 100%}}
+#sheet:not([hidden]){animation:fadeIn .3s ease}
+#sheet:not([hidden])>div{animation:sheetUp .5s cubic-bezier(.2,.9,.25,1)}
+@keyframes vestIn{from{opacity:0;scale:1.04}}
+#vest:not([hidden]){animation:vestIn .35s ease}
+@keyframes lkIn{from{opacity:0;translate:0 30px;rotate:-3deg}}
+.lkr{animation:lkIn .5s cubic-bezier(.2,.9,.3,1.2) backwards;transition:translate .2s,border-color .2s}
+@media (hover:hover){.lkr:hover{translate:0 -3px;border-color:#94a3b8}}
+@keyframes dockIn{from{translate:0 100%;opacity:0}}
+#dock:not([hidden]){animation:dockIn .45s cubic-bezier(.2,.9,.3,1) backwards}
+#dock input{transition:border-color .2s,box-shadow .25s}
+#dock input:focus{box-shadow:0 0 0 4px color-mix(in srgb,var(--ac) 25%,transparent)}
+
+/* --- ouverture de pack : aura, vignette, étincelles, confettis, carte qui se dévoile --- */
+@keyframes aura{0%,100%{scale:.85;opacity:.55}50%{scale:1.15;opacity:.95}}
+#pk::before{content:"";position:absolute;left:50%;top:50%;width:70vmin;height:70vmin;margin:-35vmin 0 0 -35vmin;border-radius:50%;pointer-events:none;background:radial-gradient(circle,color-mix(in srgb,var(--rc,#f5b301) 55%,transparent),transparent 66%);animation:aura 2.4s ease-in-out infinite}
+#pk.t3::before{animation-duration:1.4s}
+#pk{box-shadow:inset 0 0 180px 50px rgba(0,0,0,.7)}
+@keyframes rise{0%{transform:translate(0,0) scale(1);opacity:0}10%{opacity:1}50%{transform:translate(20px,-36vh) scale(.8)}100%{transform:translate(-16px,-76vh) scale(.1);opacity:0}}
+.sp{box-shadow:0 0 10px 2px var(--rc)}.sp:nth-child(3n){width:4px;height:4px}.sp:nth-child(4n){width:9px;height:9px;filter:blur(1px)}
+@keyframes fall{0%{transform:translate(0,0) rotate(0) rotateY(0)}25%{transform:translate(26px,28vh) rotate(180deg) rotateY(180deg)}50%{transform:translate(-22px,55vh) rotate(360deg) rotateY(360deg)}75%{transform:translate(20px,82vh) rotate(540deg) rotateY(540deg)}100%{transform:translate(-10px,112vh) rotate(720deg) rotateY(720deg)}}
+.cf:nth-child(3n){border-radius:50%;width:10px;height:10px}.cf:nth-child(4n){width:6px;height:20px}
+@keyframes wipe{from{clip-path:inset(0 0 100% 0 round 12px)}to{clip-path:inset(0 0 0 0 round 12px)}}
+#pk .fph{animation:wipe .9s .35s cubic-bezier(.2,.8,.2,1) backwards}
+#pk .ftop{animation:txIn .5s .5s backwards}
+@keyframes starPop{from{scale:0;rotate:-90deg;opacity:0}}
+#pk .stars{animation:starPop .6s 1s cubic-bezier(.2,1.6,.4,1) backwards}
+#pk .btn{animation:txIn .6s 1.1s backwards}
+
+/* --- stagger généré --- */
+#app>:nth-child(1){--i:0}
+#app>:nth-child(2){--i:1}
+#app>:nth-child(3){--i:2}
+#app>:nth-child(4){--i:3}
+#app>:nth-child(5){--i:4}
+#app>:nth-child(6){--i:5}
+#app>:nth-child(7){--i:6}
+#app>:nth-child(8){--i:7}
+#app>:nth-child(9){--i:8}
+#app>:nth-child(10){--i:9}
+#app>:nth-child(11){--i:10}
+#app>:nth-child(12){--i:11}
+#app>:nth-child(n+13){--i:12}
+.tac .dot:nth-child(1){animation-delay:0.355s}
+.tac .dot:nth-child(2){animation-delay:0.410s}
+.tac .dot:nth-child(3){animation-delay:0.465s}
+.tac .dot:nth-child(4){animation-delay:0.520s}
+.tac .dot:nth-child(5){animation-delay:0.575s}
+.tac .dot:nth-child(6){animation-delay:0.630s}
+.tac .dot:nth-child(7){animation-delay:0.685s}
+.tac .dot:nth-child(8){animation-delay:0.740s}
+.tac .dot:nth-child(9){animation-delay:0.795s}
+.tac .dot:nth-child(10){animation-delay:0.850s}
+.tac .dot:nth-child(11){animation-delay:0.905s}
+.lks .lkr:nth-child(1){animation-delay:0.17s}
+.lks .lkr:nth-child(2){animation-delay:0.22s}
+.lks .lkr:nth-child(3){animation-delay:0.27s}
+.lks .lkr:nth-child(4){animation-delay:0.32s}
+.lks .lkr:nth-child(5){animation-delay:0.37s}
+.lks .lkr:nth-child(6){animation-delay:0.42s}
+.lks .lkr:nth-child(7){animation-delay:0.47s}
+.lks .lkr:nth-child(8){animation-delay:0.52s}
+.lks .lkr:nth-child(9){animation-delay:0.57s}
+.lks .lkr:nth-child(10){animation-delay:0.62s}
+.lks .lkr:nth-child(11){animation-delay:0.67s}
+.lks .lkr:nth-child(12){animation-delay:0.72s}
+.qo .qb:nth-child(1){animation-delay:0.15s}
+.qo .qb:nth-child(2){animation-delay:0.22s}
+.qo .qb:nth-child(3){animation-delay:0.29s}
+.qo .qb:nth-child(4){animation-delay:0.36s}
+.hero .chips span:nth-child(1){animation-delay:0.62s}
+.hero .chips span:nth-child(2){animation-delay:0.74s}
+.hero .chips span:nth-child(3){animation-delay:0.86s}
+.bars i:nth-child(1){animation-delay:0.07s}
+.bars i:nth-child(2){animation-delay:0.14s}
+.bars i:nth-child(3){animation-delay:0.21s}
+.bars i:nth-child(4){animation-delay:0.28s}
+.bars i:nth-child(5){animation-delay:0.35s}
+.bars i:nth-child(6){animation-delay:0.42s}
+.bars i:nth-child(7){animation-delay:0.49s}
+
+/* --- accessibilité : mouvement réduit --- */
+@media (prefers-reduced-motion:reduce){
+ #app>*,.hero,.hero::before,.hero::after,.hero h1,.hero .chips span,.hero .tg,.hero p,.cta::after,.tac .dot,.tac .dot.on,.qo .qb,.tl i,.prog i,.bar i,.bars i,#sheet,#sheet>div,#vest,.lkr,#dock,.seg button.on,#pk::before,#pk .fph,#pk .ftop,#pk .stars,#pk .btn,svg.pitch,.pitch *,.rpl,.sp,.cf,.fxc{animation:none!important;transition:none!important}
+}
+.tac .dot{overflow:hidden}
+
 </style></head><body><header id="bar"><button id="mn" aria-label="Menu">☰</button><b id="logo">⚽ Kickaviz</b><button id="set" aria-label="Paramètres">⚙️</button></header><div id="ban"></div><div id="vest" hidden></div><div id="pk" hidden></div><main id="app"></main><div id="sheet" hidden></div>
 <div id="dock" hidden><input id="ans" placeholder="Écris ta réponse ici…" autocomplete="off"><button class="btn" id="go">Valider</button></div>
 <nav id="nav" hidden><button><b>💪</b><span>Physique</span></button><button><b>⚽</b><span>Vision</span></button><button><b>🃏</b><span>Mes cartes</span></button><button><b>⭐</b><span>Ma carte</span></button></nav>
@@ -398,6 +584,74 @@ BU:[
 {c:"Contre-attaque",q:"Ton milieu va te passer le ballon en profondeur. Que fais-tu ?",s:{m:[66,32,84,32],u:[[50,32,60,30]],o:[[68,28],[68,38]],b:[52,32,80,32]},k:[["moment","timing","attend","juste","quand","partir","depart"],["hors-jeu","hors jeu","reste","ligne","regard"],["course","profondeur","vite","sprint","attaque","but"]],a:"Partir au bon moment, juste quand ton partenaire passe le ballon, pour rester en jeu et attaquer le but.",t:"Ne pars pas trop tôt : tu serais hors-jeu. Attends le déclic puis sprinte."}]
 };
 Object.keys(EX2).forEach(k=>Q[k].l.push(...EX2[k]));
+/* ===== EX3 : 5 situations de plus par poste (16 par poste au total) ===== */
+const EX3={
+G:[
+{c:"Offensif",q:"Coup de pied de but : l’adversaire presse haut et ferme les options courtes. Que fais-tu ?",s:{m:[5,32],u:[[18,14],[18,50],[34,32,46,32]],o:[[30,16],[30,48],[38,30]],b:[5,32,46,32]},k:[["long","loin","avant","attaquant","haut"],["regard","scan","tete","vision","observe","presse"],["libre","court","defenseur","lateral","passe","solution"]],a:"Regarder la pression avant de jouer : si un défenseur est libre, jouer court ; sinon, jouer long vers l’avant au-dessus du pressing.",t:"Un adversaire qui presse haut laisse un grand espace dans son dos : un ballon long bien dosé peut éliminer plusieurs joueurs d’un coup."},
+{c:"Défensif",q:"Penalty pour l’adversaire. Comment te prépares-tu ?",s:{m:[3,32,3,32],u:[[22,18],[22,46]],o:[[12,32,10,32],[24,28],[24,38]],b:[9,32]},k:[["ligne","reste","centre","milieu","but"],["regard","lis","observe","tireur","corps","appui","hanche"],["attend","patien","tard","calme","dernier moment","bouge"]],a:"Rester sur ta ligne, lire le tireur (appuis, regard, hanches) et attendre le dernier moment avant de plonger.",t:"Ne plonge pas avant que le pied touche le ballon : un tireur qui change de coin te bat si tu pars trop tôt."},
+{c:"Sans ballon",q:"Ton défenseur central a le ballon et l’adversaire ne presse pas. Où te places-tu pour aider ?",s:{m:[6,32,12,32],u:[[22,24,26,24],[22,40],[30,32]],o:[[44,24],[44,42],[46,32]],b:[22,24,22,40]},k:[["propose","dispo","disponible","solution","option","soutien"],["angle","derriere","ligne","passe","defenseur","proche"],["haut","avanc","distance","regard","vision"]],a:"Te placer derrière ton défenseur, à bonne distance et avec un angle de passe clair, pour offrir une solution sûre.",t:"Ni trop près (pas de passe possible), ni trop loin (tu perds du temps) : cherche toujours l’angle qui évite l’adversaire."},
+{c:"Contre-attaque",q:"Tu captes un tir : un partenaire est démarqué tout près, un autre très haut sur le terrain. Que fais-tu ?",s:{m:[5,32],u:[[22,14,30,14],[62,48,80,46],[30,32]],o:[[50,44],[54,30],[58,52]],b:[5,32,62,48]},k:[["regard","tete","vision","scan","observe"],["avance","loin","profondeur","vite","rapide","haut"],["securite","sur","precis","proche","simple","risque"]],a:"Regarder la position des adversaires : lancer vite vers le partenaire éloigné s’il est libre, sinon jouer sûr vers le plus proche.",t:"Une relance rapide est dangereuse si l’adversaire est encore en place : choisis la passe qui te garde le ballon."},
+{c:"Défensif",q:"Un défenseur te fait une passe en retrait et un attaquant fonce vers toi. Que fais-tu ?",s:{m:[5,32,10,32],u:[[18,20,12,28]],o:[[26,36,14,32]],b:[18,22,8,32]},k:[["degage","degagement","pied","eloigne","tape","frappe"],["vite","rapide","immediat","tot","direct","tout de suite"],["cote","dehors","corner","securite","simple","touche"]],a:"Dégager tout de suite sur le côté ou en touche, sans prendre de risque, avant l’arrivée de l’attaquant.",t:"Une passe en retrait ne se prend jamais à la main : dégage vite, côté touche, jamais dans l’axe devant ton but."}
+],
+D:[
+{c:"Sans ballon",q:"Le ballon est de ton côté et un attaquant se démarque dans ton dos. Que fais-tu ?",s:{m:[32,34,30,30],u:[[28,16],[34,52],[22,32]],o:[[44,38,36,34],[38,22,32,24],[54,30]],b:[44,38,38,34]},k:[["regard","surveille","tete","epaule","vois","tourne"],["suit","marque","colle","reste","homme","zone","proche"],["communic","parl","crie","previens","partenaire","signal"]],a:"Surveiller le ballon ET l’attaquant dans ton dos, rester près de lui et prévenir tes partenaires.",t:"Tourne la tête avant que la passe parte : si tu perds ton attaquant de vue, tu as déjà un mètre de retard."},
+{c:"Défensif",q:"Corner adverse : l’attaquant que tu marques bouge dans la surface. Que fais-tu ?",s:{m:[8,30,9,32],u:[[8,22],[10,40],[6,34]],o:[[10,31,8,33],[14,24],[14,40],[18,32]],b:[1,1,10,32]},k:[["marque","colle","homme","serre","reste","suit"],["ballon","regard","lis","tete","vois","observe"],["devance","premier","anticip","saut","degage","puissance"]],a:"Rester collé à ton adversaire en gardant un œil sur le ballon, puis le devancer pour dégager.",t:"Ne reste pas derrière lui : place-toi entre lui et le ballon dès que le corner part."},
+{c:"Offensif",q:"Corner pour ton équipe. Tu es défenseur central : quel est ton rôle ?",s:{m:[58,32,76,32],u:[[72,26],[76,36],[70,44],[50,32]],o:[[80,28],[80,36],[78,42],[84,32]],b:[99,1,78,32]},k:[["monte","avance","surface","attaque","haut","entre"],["tete","saut","ballon","timing","moment","elan"],["reste","securite","contre","derriere","protege","partenaire"]],a:"Monter dans la surface en prenant de l’élan pour jouer de la tête, tout en laissant un partenaire derrière contre la contre-attaque.",t:"Lance-toi en retard : un défenseur qui part de loin saute plus haut que celui qui attend sur place."},
+{c:"Contre-attaque",q:"Tu gagnes un duel dans ta surface et tu récupères le ballon. Que fais-tu ?",s:{m:[10,32,22,32],u:[[26,16],[32,32],[26,48]],o:[[18,28,12,30],[22,40,14,36]],b:[10,32,26,16]},k:[["simple","securite","court","sur","touche"],["passe","partenaire","libre","milieu","relance","donne"],["degage","loin","eloigne","cote","dehors"]],a:"Jouer simple et sûr : passe courte vers un milieu libre, ou dégagement loin sur le côté, sans dribbler dans ta zone.",t:"Après un duel gagné, l’adversaire est encore proche : un ballon perdu chez toi, c’est un but. Ne cherche pas à briller."},
+{c:"Défensif",q:"Ton équipe défend haut pour piéger l’attaquant au hors-jeu. Quand montes-tu ?",s:{m:[34,32,38,32],u:[[34,12,38,12],[34,22,38,22],[34,42,38,42],[34,54,38,54]],o:[[40,18],[42,34],[40,48]],b:[58,32,50,32]},k:[["ligne","ensemble","groupe","alignee","meme","tous","collectif"],["moment","signal","passe","parti","quand","timing","joue"],["communic","parl","crie","chef","capitaine","leader"]],a:"Monter tous ensemble, alignés, au moment précis où la passe est jouée, sur le signal d’un leader qui parle.",t:"Un seul défenseur resté en arrière annule le piège : celui qui dirige crie « Montez ! » et tout le monde suit en même temps."}
+],
+LD:[
+{c:"Défensif",q:"Le ballon est de l’autre côté et un centre arrive au second poteau. Que fais-tu ?",s:{m:[24,52,13,42],u:[[10,30],[12,34],[8,24]],o:[[14,28],[16,42],[20,34]],b:[30,8,14,38]},k:[["poteau","second","ferme","rentre","axe","couvr"],["homme","attaquant","marque","surveille","zone","adversaire"],["ballon","regard","tete","vois","lis","observe"]],a:"Rentrer vers le second poteau pour couvrir l’attaquant qui arrive, en gardant un œil sur le ballon.",t:"Quand le ballon est de l’autre côté, le latéral devient un défenseur central : rentre dans l’axe, le couloir peut attendre."},
+{c:"Offensif",q:"Tu as le ballon sur l’aile et ton ailier est bien marqué. Quelle option ?",s:{m:[52,54,60,50],u:[[66,46],[58,32],[70,28]],o:[[68,48],[62,40],[56,58]],b:[52,54,60,50]},k:[["passe","milieu","interieur","recentre","joue","remise"],["conduite","avance","monte","percut","attire"],["centre","avant","attaquant","profondeur","long","haut"]],a:"Jouer à l’intérieur vers un milieu libre, ou avancer pour attirer un adversaire, puis servir plus haut.",t:"Un ailier marqué libère un autre joueur : cherche l’espace que l’adversaire vient de laisser."},
+{c:"Sans ballon",q:"Ton équipe presse haut. Où te places-tu et que surveilles-tu ?",s:{m:[48,52,56,50],u:[[62,40,66,38],[62,26],[60,54],[40,32]],o:[[68,52,64,50],[70,36],[74,26]],b:[68,52,64,50]},k:[["monte","haut","bloc","avanc","ligne","presse"],["adversaire","homme","proche","marque","colle","surveille"],["passe","aile","coupe","ferme","interception","couloir"]],a:"Monter avec le bloc, rester proche de ton adversaire direct et couper la passe vers l’aile.",t:"En pressing, tout le monde monte en même temps : un seul joueur en retard donne un espace dans son dos."},
+{c:"Contre-attaque",q:"Tu étais monté et ton équipe perd le ballon. Que fais-tu ?",s:{m:[66,54,44,50],u:[[40,40],[40,24],[30,32]],o:[[58,46,46,44],[60,32,48,32],[64,20,52,22]],b:[58,46,46,44]},k:[["repli","recul","retour","sprint","course","vite"],["ferme","couloir","cote","ralenti","retard","tempor"],["central","partenaire","aide","couvr","ligne","defenseur"]],a:"Revenir vite en sprint, fermer ton couloir et ralentir l’adversaire pour laisser tes partenaires se replacer.",t:"Ne cours pas derrière le ballon : reviens devant lui, entre le ballon et ton but."},
+{c:"Défensif",q:"Coup franc adverse excentré près de ta zone. Où te places-tu ?",s:{m:[22,50,18,46],u:[[14,40],[14,32],[16,26],[26,32]],o:[[26,44],[24,34],[28,28],[20,52]],b:[34,58,16,34]},k:[["ligne","alignee","place","reste","meme","defense"],["homme","adversaire","marque","surveille","zone","colle"],["ballon","regard","centre","poteau","tete","observe"]],a:"Te placer sur la ligne défensive avec tes partenaires, marquer ton adversaire direct et garder un œil sur le ballon.",t:"Reste sur la même ligne que tes partenaires : un seul joueur trop bas ou trop haut remet l’attaquant en jeu."}
+],
+M:[
+{c:"Offensif",q:"Tu as le ballon au milieu et un adversaire arrive vite sur toi. Que fais-tu ?",s:{m:[52,32,58,32],u:[[44,18],[60,46,66,46],[40,40]],o:[[60,34,54,33],[62,22]],b:[52,32,58,32]},k:[["regard","scan","tete","vision","avant"],["passe","simple","touche","vite","rapide","court"],["libre","partenaire","espace","derriere","solution"]],a:"Regarder tes options avant l’arrivée de l’adversaire, puis jouer vite vers un partenaire libre.",t:"Regarde 2 fois avant de recevoir : celui qui arrive sur toi laisse toujours un partenaire libre derrière lui."},
+{c:"Défensif",q:"Ton équipe défend en bloc et le ballon est sur l’aile. Où te places-tu ?",s:{m:[48,32,50,40],u:[[46,52,50,50],[44,14],[36,30]],o:[[56,54,52,52],[62,40],[58,24]],b:[56,54,52,52]},k:[["compact","serre","ligne","distance","bloc","groupe"],["cote","ballon","glisse","coulisse","decale","deplace"],["axe","protege","passe","couvre","interieur","centre"]],a:"Te décaler vers le ballon en restant compact avec tes partenaires et protéger l’axe.",t:"Le côté opposé au ballon est le moins dangereux : ferme l’axe en premier, le couloir peut attendre."},
+{c:"Sans ballon",q:"Ton partenaire a le ballon et s’apprête à le donner à l’attaquant en remise. Quelle course fais-tu ?",s:{m:[48,32,64,24],u:[[54,46],[74,32]],o:[[62,44,56,42],[76,30],[62,30]],b:[54,46,70,34]},k:[["course","appel","derriere","espace","profondeur","bouge"],["troisieme","relais","remise","mur","homme","soutien"],["timing","moment","tard","quand","retard","tempo"]],a:"Lancer une course dans l’espace derrière le marquage pour recevoir la remise, comme troisième homme, au bon moment.",t:"Pars quand l’attaquant touche le ballon, pas avant : le troisième homme surprend en arrivant lancé."},
+{c:"Contre-attaque",q:"Tu récupères le ballon mais un seul partenaire est devant, avec deux adversaires qui reviennent. Que fais-tu ?",s:{m:[48,32,54,32],u:[[68,30,78,30],[38,22],[40,44]],o:[[62,26,58,28],[64,38,58,36]],b:[48,32,54,32]},k:[["calme","patien","ralenti","temps","tempo","attend"],["garde","protege","conserve","ballon","simple","possession"],["equipe","coequip","monte","soutien","partenaire","arrive"]],a:"Garder le ballon, ralentir le jeu et attendre que l’équipe monte plutôt que forcer une passe risquée.",t:"Une contre-attaque à 1 contre 2 n’en est pas une : mieux vaut garder le ballon que le perdre à 40 m du but."},
+{c:"Offensif",q:"Tu as le ballon et l’ailier opposé est complètement seul. Que fais-tu ?",s:{m:[52,32,54,32],u:[[46,50],[40,24],[66,12,70,12]],o:[[56,50],[58,40],[60,26]],b:[52,32,66,12]},k:[["changement","cote","long","aile","oppose","diagonale"],["regard","scan","tete","vision","observe","lis"],["precis","pied","passe","timing","moment","tendu"]],a:"Regarder le terrain puis changer de côté par une passe longue et précise vers l’ailier isolé.",t:"Quand l’adversaire a tout fermé d’un côté, l’autre est vide : un changement d’aile met plusieurs joueurs hors de position."}
+],
+MDC:[
+{c:"Sans ballon",q:"L’adversaire fait circuler le ballon devant ta défense. Comment protèges-tu l’axe ?",s:{m:[34,32,38,34],u:[[28,12],[28,52],[22,32],[26,22],[26,42]],o:[[48,24],[46,40],[44,32,40,30]],b:[48,24,46,40]},k:[["axe","centre","devant","ligne","protege","filtre"],["partenaire","compact","distance","meme","serre","defenseur"],["surveille","regard","tete","scan","vois","entre"]],a:"Rester dans l’axe devant les défenseurs, garder des lignes compactes et surveiller les joueurs qui se glissent entre elles.",t:"Le milieu défensif ferme l’espace entre les lignes : la passe entre le milieu et la défense est celle qui fait mal."},
+{c:"Offensif",q:"Ton gardien te passe le ballon et un adversaire est à 5 mètres. Que fais-tu ?",s:{m:[30,32,32,32],u:[[10,32],[24,12],[24,52]],o:[[34,34,32,33],[40,24],[42,42]],b:[10,32,28,32]},k:[["touche","simple","rapide","vite","court","direct"],["passe","defenseur","lateral","remise","retour","joue"],["regard","scan","tete","vision","epaule","avant"]],a:"Regarder avant de recevoir puis jouer en une touche vers un défenseur ou un latéral libre.",t:"Si tu prends deux touches avec un adversaire à 5 m, tu perds le ballon : décide avant qu’il arrive."},
+{c:"Défensif",q:"Corner adverse : où te places-tu pour aider ta défense ?",s:{m:[22,32,18,32],u:[[8,28],[8,38],[10,44],[10,22]],o:[[10,31],[12,36],[16,26],[20,40]],b:[1,1,10,32]},k:[["devant","limite","surface","zone","penalty","entree"],["rebond","second","repousse","reprise","frappe","loin"],["marque","adversaire","homme","colle","surveille","ballon"]],a:"Te placer à l’entrée de la surface pour récupérer les ballons repoussés et empêcher la frappe de loin.",t:"Un corner a deux dangers : la tête dans la surface et la reprise de volée à 20 m. Toi, tu t’occupes de la deuxième."},
+{c:"Contre-attaque",q:"Tu récupères le ballon et ton équipe a des joueurs lancés devant. Que fais-tu ?",s:{m:[46,32,52,32],u:[[64,14,76,14],[64,50,76,50],[58,32,70,32]],o:[[68,28],[70,40],[72,52]],b:[46,32,64,14]},k:[["vite","rapide","direct","immediat","avant","vertical"],["passe","partenaire","libre","lance","servi","donne"],["espace","profondeur","course","replace","desorganis","derriere"]],a:"Servir vite le partenaire le mieux placé dans l’espace, avant que l’adversaire ait le temps de se replacer.",t:"Dans les 3 premières secondes après la récupération, l’adversaire est désorganisé : ta passe doit aller vers l’avant."},
+{c:"Sans ballon",q:"Ton équipe attaque haut. Où te places-tu pour récupérer les ballons perdus ?",s:{m:[52,32,54,32],u:[[74,20],[74,44],[66,32],[40,22],[40,42]],o:[[80,30],[82,40],[66,50]],b:[74,20,80,30]},k:[["derriere","equilibr","securite","reste","protege","arriere"],["milieu","axe","centre","ligne","terrain"],["recup","rebond","ballon","contre","second","coupe"]],a:"Rester derrière le ballon, au milieu, pour récupérer les deuxièmes ballons et couper les contre-attaques.",t:"Tu es l’assurance de l’équipe : quand tout le monde attaque, c’est à toi de rester en retrait."}
+],
+MOC:[
+{c:"Sans ballon",q:"Ton équipe attaque par l’aile et un centre se prépare. Où arrives-tu dans la surface ?",s:{m:[66,32,80,32],u:[[72,56,84,50],[78,22]],o:[[82,30],[82,38],[78,46],[88,32]],b:[72,56,84,50]},k:[["surface","penalty","limite","zone","entre","arrive"],["retard","tempo","timing","moment","tard","lance"],["rebond","second","reprise","frappe","ballon","repli"]],a:"Arriver en retard dans la surface, vers le point de penalty, pour reprendre un centre ou un rebond.",t:"Ne te colle pas à l’avant-centre : arrive lancé, au bon moment, à la limite de la surface."},
+{c:"Offensif",q:"Tu reçois entre les lignes et deux défenseurs ne sont pas encore sur toi. Que fais-tu ?",s:{m:[68,32,76,32],u:[[78,18,88,18],[78,46,88,46],[56,32]],o:[[74,26],[74,40],[84,32]],b:[56,32,68,32]},k:[["retourne","face","avance","orient","demi-tour","tourne"],["passe","decisive","profondeur","ailier","avant","lance"],["tir","frappe","but","cadre","conclure"]],a:"Te retourner vite face au but puis choisir entre la passe décisive et la frappe.",t:"Reçois le corps ouvert, orienté vers le but : tu gagnes une demi-seconde sur le défenseur."},
+{c:"Défensif",q:"L’adversaire relance depuis sa défense. Où te places-tu pour le presser ?",s:{m:[62,32,56,30],u:[[66,16],[66,48],[50,32]],o:[[44,32,48,32],[50,18],[50,46],[56,26]],b:[44,32,50,18]},k:[["presse","pression","gene","ferme","bloque"],["passe","milieu","coupe","ligne","axe","interception"],["ensemble","equipe","collectif","coequip","declenche","signal"]],a:"Presser en même temps que les autres, en coupant la passe vers le milieu, sur un signal commun.",t:"Un pressing seul ne sert à rien : toute l’équipe doit partir sur le même signal, souvent une passe en retrait."},
+{c:"Contre-attaque",q:"Tu as le ballon au centre devant trois défenseurs qui reculent. Que fais-tu ?",s:{m:[58,32,68,32],u:[[62,16,78,12],[62,48,78,52],[46,32]],o:[[74,26],[74,38],[78,32]],b:[58,32,68,32]},k:[["passe","ailier","aile","decale","ecarte","ouvre"],["course","partenaire","profondeur","lance","derriere","appel"],["vite","rapide","direct","avant","immediat"]],a:"Passer vite à l’ailier ou à un partenaire lancé plutôt que de t’engager dans l’axe devant trois défenseurs.",t:"Face à une défense qui recule, l’espace est sur les côtés : écarte d’abord, reviens dans la surface ensuite."},
+{c:"Offensif",q:"Tu as le ballon à 25 m et ton avant-centre fait un appel dans le dos de la défense. Que fais-tu ?",s:{m:[66,32,70,32],u:[[78,32,90,32],[64,14],[64,50]],o:[[76,28],[78,38],[84,32]],b:[66,32,86,32]},k:[["passe","profondeur","dos","derriere","donne","glisse"],["timing","moment","vite","tot","direct","tendu"],["regard","tete","vision","scan","vois","observe"]],a:"Regarder l’appel et glisser la passe dans le dos de la défense, au bon moment, devant l’attaquant.",t:"Joue la passe quand le défenseur regarde le ballon : l’attaquant part dans son dos, il n’a plus le temps de réagir."}
+],
+ALD:[
+{c:"Offensif",q:"Tu as le ballon sur l’aile et le défenseur recule devant toi. Que fais-tu ?",s:{m:[72,54,80,50],u:[[86,32],[70,34],[80,18]],o:[[78,52,76,50],[82,40],[84,28]],b:[72,54,80,50]},k:[["accelere","vitesse","change","rythme","avance","conduite"],["centre","passe","avant","attaquant","poteau","decale"],["tir","frappe","interieur","rentre","axe","repique"]],a:"Accélérer pour prendre l’espace, puis centrer, passer ou rentrer frapper selon la position du défenseur.",t:"Un défenseur qui recule te laisse du terrain : accélère et force-le à choisir entre te laisser centrer ou te laisser tirer."},
+{c:"Sans ballon",q:"Ton équipe attaque par le centre. Que fais-tu sur ton aile ?",s:{m:[68,54,76,48],u:[[62,32,72,32],[60,20],[50,32]],o:[[74,34],[72,44],[78,26]],b:[50,32,62,32]},k:[["large","largeur","aile","ecarte","etire","reste"],["course","appel","profondeur","derriere","diagonale","dos"],["quand","moment","signal","regard","timing","tete"]],a:"Rester large pour étirer la défense, puis faire une course en diagonale dans le dos du latéral au bon moment.",t:"Ta largeur ouvre le centre pour tes partenaires : tant que tu es large, le latéral ne peut pas rentrer aider."},
+{c:"Défensif",q:"L’adversaire a le ballon sur ton côté et son latéral monte. Que fais-tu ?",s:{m:[52,52,46,48],u:[[40,40],[34,24],[40,32]],o:[[56,48,48,46],[62,36,54,40]],b:[56,48,48,46]},k:[["repli","recul","retour","bloc","ligne","revient"],["ferme","couloir","lateral","aide","soutien","couvr"],["double","deux","ralenti","avec","partenaire","suivre"]],a:"Revenir en bloc, aider ton latéral à fermer le couloir et suivre le latéral adverse qui monte.",t:"Un ailier qui suit le latéral adverse évite le 2 contre 1 : ton latéral n’est jamais seul."},
+{c:"Contre-attaque",q:"Contre-attaque : ton milieu a le ballon au centre et tu es à 35 m du but sur l’aile. Que fais-tu ?",s:{m:[55,54,86,48],u:[[52,32,66,32],[50,14,80,16]],o:[[72,50],[76,30],[80,40]],b:[52,32,66,32]},k:[["sprint","course","vite","appel","profondeur","accelere"],["aile","large","exterieur","ecarte","couloir"],["attire","defenseur","libere","axe","espace","fixe"]],a:"Sprinter sur l’aile pour attirer le défenseur et libérer l’axe, puis recevoir en profondeur.",t:"Ton sprint fixe le latéral adverse : même sans ballon, tu crées l’espace pour tes partenaires."},
+{c:"Offensif",q:"Tu tires un corner. Quelle option choisis-tu ?",s:{m:[98,62,98,62],u:[[84,32],[86,24],[82,42],[70,48]],o:[[86,30],[88,38],[84,26]],b:[98,62,86,34]},k:[["court","partenaire","relais","passe","appui"],["centre","poteau","surface","tete","ballon","tendu"],["regard","vision","observe","signal","vois","scan"]],a:"Regarder la surface et envoyer le ballon sur le premier ou le second poteau, ou jouer court si personne n’est libre.",t:"Avant de frapper, regarde qui est démarqué : un bon corner, c’est un ballon que tu envoies là où tu l’as décidé."}
+],
+A:[
+{c:"Sans ballon",q:"Ton équipe construit et ton défenseur direct est collé à toi. Comment le fais-tu douter ?",s:{m:[72,32,76,24],u:[[50,32],[58,18],[58,46]],o:[[74,33,72,31],[66,26],[64,40]],b:[50,32,58,18]},k:[["feinte","faux","fixe","appel","contre","bluff"],["court","dos","derriere","demarqu","epaule","bouge"],["profondeur","pied","appui","ballon","moment","timing"]],a:"Faire un faux appel court puis partir en profondeur dans son dos, au moment où le ballon peut arriver.",t:"Un défenseur collé réagit à ton premier mouvement : fais un appel court, puis change de direction en profondeur."},
+{c:"Offensif",q:"Tu reçois le ballon à 20 m du but avec un défenseur dans ton dos. Que fais-tu ?",s:{m:[80,32,86,32],u:[[78,16,86,14],[78,48,86,50]],o:[[82,32,80,32],[86,22],[86,42]],b:[60,32,80,32]},k:[["protege","corps","dos","bras","pivot","coince"],["retourne","tourne","tir","frappe","but","orient"],["passe","partenaire","remise","ailier","decale","jou"]],a:"Protéger le ballon avec ton corps puis te retourner pour tirer, ou décaler un partenaire mieux placé.",t:"Ton corps est ton bouclier : garde le défenseur dans ton dos, le ballon loin de lui, et décide dès que tu sens la distance."},
+{c:"Défensif",q:"Le défenseur central adverse a le ballon et ses partenaires sont marqués. Que fais-tu ?",s:{m:[76,32,82,32],u:[[68,16],[68,48],[56,32]],o:[[88,32,80,32],[84,20],[84,44],[90,24]],b:[88,32,80,32]},k:[["presse","pression","gene","court","harcele"],["passe","ligne","oriente","cote","coupe","bloque"],["ensemble","equipe","collectif","signal","declenche","partenaire"]],a:"Presser le porteur en l’orientant vers un côté et en coupant la ligne de passe, avec toute l’équipe.",t:"Presse en courbe : en coupant la passe vers l’intérieur, tu forces le porteur à jouer vers la touche, où l’espace est limité."},
+{c:"Contre-attaque",q:"Ton équipe récupère et tu es seul devant un défenseur. Que fais-tu ?",s:{m:[66,32,90,26],u:[[48,32,64,32],[52,14,76,14]],o:[[82,30,78,30]],b:[48,32,72,30]},k:[["course","appel","profondeur","derriere","sprint","vite"],["ecarte","large","cote","diagonale","decale","fixe"],["hors-jeu","ligne","timing","moment","regard","attend"]],a:"Partir en profondeur en diagonale pour sortir du champ du défenseur, tout en restant sur la ligne du hors-jeu.",t:"Reste sur la ligne du dernier défenseur et pars au moment de la passe : trop tôt, c’est hors-jeu."},
+{c:"Offensif",q:"Ton ailier va centrer un ballon tendu. Où te places-tu dans la surface ?",s:{m:[80,32,90,32],u:[[72,56,88,46],[76,20]],o:[[84,28],[84,38],[88,32]],b:[72,56,92,36]},k:[["premier","poteau","devant","court","tendu","rasant"],["course","appel","bouge","attaque","vite","derriere"],["defenseur","marque","devance","dos","demarqu","adversaire"]],a:"Attaquer le premier poteau avec un appel court devant le défenseur pour reprendre un centre tendu.",t:"Sur un centre tendu, le premier poteau est le plus rentable : le ballon arrive vite, tu n’as qu’à le dévier ou le pousser au fond."}
+],
+BU:[
+{c:"Offensif",q:"Tu es dans la surface et le ballon arrive à mi-hauteur. Quelle frappe ?",s:{m:[86,32,92,32],u:[[78,20],[78,44]],o:[[88,28],[90,36],[96,32]],b:[74,54,88,32]},k:[["touche","direct","volee","reprise","tir"],["cadre","coin","placement","angle","precis","ras"],["gardien","regard","tete","observe","position","vois"]],a:"Reprendre de volée ou en une touche en visant le cadre et le coin opposé au gardien, plutôt que la puissance.",t:"Avec peu de temps, vise le coin : un tir cadré et placé vaut mieux qu’un tir puissant au centre."},
+{c:"Sans ballon",q:"Le gardien adverse a le ballon dans les mains. Où te places-tu ?",s:{m:[80,32,86,34],u:[[72,16],[72,48],[64,32]],o:[[96,32],[88,26],[88,40]],b:[96,32]},k:[["presse","pression","gene","ferme","harcele"],["passe","defenseur","lateral","couvre","coupe","ligne","angle"],["pret","reaction","attend","relance","regard","timing"]],a:"Te placer pour couper la passe vers un défenseur et être prêt à presser dès la relance.",t:"Place-toi entre les deux défenseurs centraux : le gardien devra choisir un côté, et c’est ton équipe qui presse celui-là."},
+{c:"Défensif",q:"Corner adverse : ton équipe défend dans la surface. Où te places-tu ?",s:{m:[52,32,50,32],u:[[8,28],[8,36],[10,44],[10,22],[14,32]],o:[[10,31],[12,36],[16,26],[20,42]],b:[1,1,12,32]},k:[["reste","haut","milieu","avance","pret","ligne"],["contre","sortie","relance","degagement","deuxieme"],["oblige","fixe","defenseur","adversaire","menace","garde"]],a:"Rester haut vers le milieu de terrain pour offrir une solution de contre-attaque et obliger l’adversaire à garder un défenseur.",t:"Un buteur qui reste haut, c’est un adversaire qui n’ose pas monter : ton équipe défend plus sereinement."},
+{c:"Contre-attaque",q:"Contre-attaque : ton ailier a le ballon et deux défenseurs reviennent. Où te places-tu ?",s:{m:[66,32,88,36],u:[[62,12,84,18],[48,32]],o:[[82,28],[84,40],[86,20]],b:[62,12,80,18]},k:[["course","appel","surface","premier","second","poteau"],["ecarte","fixe","defenseur","espace","centre","attire"],["vite","tempo","moment","timing","arrive","lance"]],a:"Attaquer la surface en diagonale vers le premier ou le second poteau pour fixer les défenseurs et offrir un centre.",t:"Arrive au point de penalty en vitesse : trop tôt, tu es collé au défenseur ; trop tard, tu rates le centre."},
+{c:"Offensif",q:"Penalty pour ton équipe et tu es le tireur. Que fais-tu ?",s:{m:[82,32,89,32],u:[[78,18],[78,46]],o:[[99,32],[84,22],[84,42]],b:[90,32]},k:[["calme","respire","concentr","confiance","serein","pose"],["coin","angle","cote","choisi","decide","place"],["fort","puissance","precis","ras","lucarne","frappe"]],a:"Rester calme, choisir ton coin avant de tirer et frapper fort et placé, sans changer d’avis au dernier moment.",t:"Un penalty se gagne dans la tête : choisis ton coin avant de partir et tiens-toi à ta décision."}
+]
+};
+Object.keys(EX3).forEach(k=>Q[k].l.push(...EX3[k]));
+
 const addPF=()=>PF.push(
 {c:"Défensif",q:"Ton partenaire est battu par l’adversaire. Que fais-tu ?",s:{m:[40,32,34,30],u:[[44,40]],o:[[48,36,40,34],[56,24]],b:[48,36,40,34]},k:[["couvr","couverture","aide","soutien"],["ferme","axe","angle","coupe"],["communic","parl","crie"]],a:"Aller aider ton partenaire en restant derrière lui et fermer le passage devant le but.",t:"Dès qu’un partenaire est battu, tu deviens le dernier défenseur."},
 {c:"Offensif",q:"Corner pour ton équipe. Quel est ton rôle ?",s:{m:[60,32,76,30],u:[[72,28],[76,34],[70,40]],o:[[80,28],[80,34],[78,40]],b:[99,1,78,32]},k:[["rebond","second","balle","frappe"],["surface","poteau","zone","attaque"],["securite","contre","reste","derriere"]],a:"Attaquer la surface ou te placer pour le ballon qui retombe, sans oublier de protéger derrière.",t:"Sur un corner, un joueur reste toujours derrière pour protéger contre la contre-attaque."},
@@ -567,7 +821,7 @@ function renderEnd(){
 function home(){
  cur=home;clearInterval(tm);dock.hidden=true;const t=T(),h=load(),agg={};CATS.forEach(c=>agg[c]=[0,0]);h.forEach(r=>CATS.forEach(c=>{if(r.c[c]){agg[c][0]+=r.c[c][0];agg[c][1]+=r.c[c][1]}}));
  const ic=["🧤","🛡️","🧠","🎯"];
- app.innerHTML=`<section class="hero"><div class="ball">⚽</div><h1>${t.title}</h1><p class="tg">${t.tag}</p><p>${t.sub}</p><div class="chips"><span><b>11</b> ${t.s1}</span><span><b>100+</b> ${t.s2}</span><span><b>3</b> ${t.s3}</span></div><button class="cta" id="cta">${t.cta} ▸</button></section><h2>${t.lv}</h2><div class="seg">${t.lvn.map((n,i)=>`<button data-l="${i}" class="${i==LV?"on":""}"><b>${n}</b><small>${t.lvd[i]}</small></button>`).join("")}</div><h2 id="poste">${t.ps}</h2>${GR.map(([g,ks],gi)=>`<div class="gl">${ic[gi]} ${t.grp[gi]}</div><div class="grid">${ks.map(k=>`<button class="pos" data-k="${k}"><span class="ab">${AB[k]}</span><b>${pn(k)}</b></button>`).join("")}</div>`).join("")}<h2>${t.pr}</h2><div class="card">${h.length?CATS.map(c=>{const p=agg[c][1]?Math.round(agg[c][0]/agg[c][1]*100):0;return`<div class="row"><span>${t.cat?t.cat[c]:c}</span><span class="mu">${agg[c][1]?p+" %":"–"}</span></div><div class="bar"><i style="width:${p}%"></i></div>`}).join("")+`<h2 style="margin-top:18px">${t.last}</h2>`+h.slice(-5).reverse().map(r=>`<div class="row"><span>${pn(r.k)} · ${r.d}</span><b>${r.s}/20</b></div>`).join(""):`<p class="mu">${t.none}</p>`}</div>`;
+ app.innerHTML=`<section class="hero"><div class="ball">⚽</div><h1>${t.title}</h1><p class="tg">${t.tag}</p><p>${t.sub}</p><div class="chips"><span><b>11</b> ${t.s1}</span><span><b>${Math.floor(Object.values(Q).reduce((a,v)=>a+v.l.length,0)/10)*10}+</b> ${t.s2}</span><span><b>3</b> ${t.s3}</span></div><button class="cta" id="cta">${t.cta} ▸</button></section><h2>${t.lv}</h2><div class="seg">${t.lvn.map((n,i)=>`<button data-l="${i}" class="${i==LV?"on":""}"><b>${n}</b><small>${t.lvd[i]}</small></button>`).join("")}</div><h2 id="poste">${t.ps}</h2>${GR.map(([g,ks],gi)=>`<div class="gl">${ic[gi]} ${t.grp[gi]}</div><div class="grid">${ks.map(k=>`<button class="pos" data-k="${k}"><span class="ab">${AB[k]}</span><b>${pn(k)}</b></button>`).join("")}</div>`).join("")}<h2>${t.pr}</h2><div class="card">${h.length?CATS.map(c=>{const p=agg[c][1]?Math.round(agg[c][0]/agg[c][1]*100):0;return`<div class="row"><span>${t.cat?t.cat[c]:c}</span><span class="mu">${agg[c][1]?p+" %":"–"}</span></div><div class="bar"><i style="width:${p}%"></i></div>`}).join("")+`<h2 style="margin-top:18px">${t.last}</h2>`+h.slice(-5).reverse().map(r=>`<div class="row"><span>${pn(r.k)} · ${r.d}</span><b>${r.s}/20</b></div>`).join(""):`<p class="mu">${t.none}</p>`}</div>`;
  app.querySelectorAll(".pos").forEach(b=>b.onclick=()=>start(b.dataset.k));
  app.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{LV=+b.dataset.l;try{localStorage.setItem("vdjlv",LV)}catch(e){}app.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x==b))});
  $("#cta").onclick=()=>$("#poste").scrollIntoView({behavior:"smooth"});scrollTo(0,0)}
@@ -584,7 +838,7 @@ Object.assign(TX.en,{tag:"Step onto the pitch ⚡",pick:"2. Take your place on t
 const POS={G:[50,91],LG:[13,74],D:[50,77],LD:[87,74],MDC:[50,60],M:[50,46],MOC:[50,32],ALG:[13,26],ALD:[87,26],A:[30,12],BU:[70,12]};let PK=null;
 function home(){
  cur=home;clearInterval(tm);dock.hidden=true;const t=T(),h=load(),agg={};CATS.forEach(c=>agg[c]=[0,0]);h.forEach(r=>CATS.forEach(c=>{if(r.c[c]){agg[c][0]+=r.c[c][0];agg[c][1]+=r.c[c][1]}}));
- app.innerHTML=`<section class="hero"><div class="ball">⚽</div><h1>${t.title}</h1><p class="tg">${t.tag}</p><p>${t.sub}</p><div class="chips"><span><b>11</b> ${t.s1}</span><span><b>100+</b> ${t.s2}</span><span><b>3</b> ${t.s3}</span></div><button class="cta" id="cta">${t.cta} ▸</button></section><h2>${t.lv}</h2><div class="seg">${t.lvn.map((n,i)=>`<button data-l="${i}" class="${i==LV?"on":""}"><b>${n}</b><small>${t.lvd[i]}</small></button>`).join("")}</div><h2 id="poste">${t.pick}</h2><div class="tac">${ORD.map(k=>`<button class="dot${PK==k?" on":""}" data-k="${k}" style="left:${POS[k][0]}%;top:${POS[k][1]}%">${AB[k]}</button>`).join("")}</div><div class="card selbar"><b id="sn">${PK?pn(PK):t.picks}</b><button class="btn" id="ko" ${PK?"":"disabled"}>${t.ko} ▸</button></div><h2>${t.pr}</h2><div class="card">${h.length?CATS.map(c=>{const p=agg[c][1]?Math.round(agg[c][0]/agg[c][1]*100):0;return`<div class="row"><span>${t.cat?t.cat[c]:c}</span><span class="mu">${agg[c][1]?p+" %":"–"}</span></div><div class="bar"><i style="width:${p}%"></i></div>`}).join("")+`<h2 style="margin-top:18px">${t.last}</h2>`+h.slice(-5).reverse().map(r=>`<div class="row"><span>${pn(r.k)} · ${r.d}</span><b>${r.s}/20</b></div>`).join(""):`<p class="mu">${t.none}</p>`}</div>`;
+ app.innerHTML=`<section class="hero"><div class="ball">⚽</div><h1>${t.title}</h1><p class="tg">${t.tag}</p><p>${t.sub}</p><div class="chips"><span><b>11</b> ${t.s1}</span><span><b>${Math.floor(Object.values(Q).reduce((a,v)=>a+v.l.length,0)/10)*10}+</b> ${t.s2}</span><span><b>3</b> ${t.s3}</span></div><button class="cta" id="cta">${t.cta} ▸</button></section><h2>${t.lv}</h2><div class="seg">${t.lvn.map((n,i)=>`<button data-l="${i}" class="${i==LV?"on":""}"><b>${n}</b><small>${t.lvd[i]}</small></button>`).join("")}</div><h2 id="poste">${t.pick}</h2><div class="tac">${ORD.map(k=>`<button class="dot${PK==k?" on":""}" data-k="${k}" style="left:${POS[k][0]}%;top:${POS[k][1]}%">${AB[k]}</button>`).join("")}</div><div class="card selbar"><b id="sn">${PK?pn(PK):t.picks}</b><button class="btn" id="ko" ${PK?"":"disabled"}>${t.ko} ▸</button></div><h2>${t.pr}</h2><div class="card">${h.length?CATS.map(c=>{const p=agg[c][1]?Math.round(agg[c][0]/agg[c][1]*100):0;return`<div class="row"><span>${t.cat?t.cat[c]:c}</span><span class="mu">${agg[c][1]?p+" %":"–"}</span></div><div class="bar"><i style="width:${p}%"></i></div>`}).join("")+`<h2 style="margin-top:18px">${t.last}</h2>`+h.slice(-5).reverse().map(r=>`<div class="row"><span>${pn(r.k)} · ${r.d}</span><b>${r.s}/20</b></div>`).join(""):`<p class="mu">${t.none}</p>`}</div>`;
  app.querySelectorAll(".dot").forEach(b=>b.onclick=()=>{PK=b.dataset.k;app.querySelectorAll(".dot").forEach(x=>x.classList.toggle("on",x==b));$("#sn").textContent=pn(PK);$("#ko").disabled=false});
  $("#ko").onclick=()=>{if(PK)start(PK)};
  app.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{LV=+b.dataset.l;try{localStorage.setItem("vdjlv",LV)}catch(e){}app.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x==b))});
@@ -909,4 +1163,83 @@ document.addEventListener("pointerleave",()=>{if(el){rst(el);el=null}},true)})()
 $("#mn").onclick=openMenu;
 $("#set").onclick=openSet;$("#logo").onclick=home;apply();
 $("#go").onclick=submit;inp.onkeydown=e=>{if(e.key=="Enter")submit()};boot();
-</script></body></html>
+</script>
+<script>
+/* ===== V6 : animations complémentaires (terrain animé, ondulation au clic, compteurs) ===== */
+(()=>{
+const NS="http://www.w3.org/2000/svg",app=document.getElementById("app");
+if(!app)return;
+const calm=()=>document.documentElement.hasAttribute("data-calm")||matchMedia("(prefers-reduced-motion:reduce)").matches;
+const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+const mk=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e};
+
+/* Terrain : bandes de tonte, joueurs qui apparaissent puis suivent leurs flèches, ballon qui part */
+function enhancePitch(sv){
+  sv.dataset.fx="1";
+  const first=sv.querySelector("rect");
+  if(first){const g=mk("g",{class:"mow"});for(let i=0;i<8;i+=2)g.appendChild(mk("rect",{x:i*12.5,y:0,width:12.5,height:64,fill:"#fff",opacity:".06"}));first.after(g)}
+  const circ=[...sv.querySelectorAll('circle[r="2.3"]')],lines=[...sv.querySelectorAll("line[stroke-dasharray]")],
+        ballL=sv.querySelector('line[stroke="#000"]'),ballC=sv.querySelector('circle[r="1.5"]'),movers=[];
+  let idx=0;
+  circ.forEach(c=>{
+    const txt=c.nextElementSibling,cx=+c.getAttribute("cx"),cy=+c.getAttribute("cy"),g=mk("g",{class:"pl"});
+    g.style.setProperty("--d",(150+idx++*60)+"ms");
+    c.before(g);g.appendChild(c);
+    if(txt&&txt.tagName.toLowerCase()==="text")g.appendChild(txt);
+    const ln=lines.find(l=>Math.abs(+l.getAttribute("x1")-cx)<.01&&Math.abs(+l.getAttribute("y1")-cy)<.01);
+    if(ln)movers.push({g,dx:+ln.getAttribute("x2")-cx,dy:+ln.getAttribute("y2")-cy,s:0});
+    else if(c.getAttribute("fill")==="#f5b301")g.before(mk("circle",{cx,cy,r:2.3,class:"pring"}));
+  });
+  if(ballC){
+    const bx=+ballC.getAttribute("cx"),by=+ballC.getAttribute("cy"),g=mk("g",{class:"pl"});
+    g.style.setProperty("--d","700ms");
+    ballC.before(g);g.appendChild(ballC);
+    if(ballL)movers.push({g,dx:+ballL.getAttribute("x2")-bx,dy:+ballL.getAttribute("y2")-by,s:.15});
+  }
+  if(calm()||!movers.length)return;
+  const MV=2400,HOLD=1000,RS=700,TOT=MV+HOLD+RS,T0=performance.now()+1200;
+  (function f(n){
+    if(!sv.isConnected)return;
+    let t=n-T0;if(t>=0)t%=TOT;
+    movers.forEach(m=>{
+      let e=0,op=1;
+      if(t>=0){
+        if(t<MV){const u=Math.min(1,Math.max(0,(t/MV-m.s)/(1-m.s)));e=ease(u)}
+        else if(t<MV+HOLD)e=1;
+        else{const r=(t-MV-HOLD)/RS;if(r<.5){e=1;op=1-r*2}else{e=0;op=(r-.5)*2}}
+      }
+      m.g.setAttribute("transform","translate("+(m.dx*e).toFixed(2)+" "+(m.dy*e).toFixed(2)+")");
+      m.g.setAttribute("opacity",op.toFixed(2));
+    });
+    requestAnimationFrame(f);
+  })(performance.now());
+}
+
+/* Notes de la carte de fin : compteur qui monte */
+function countUp(el){
+  if(el.dataset.cu)return;el.dataset.cu="1";
+  const to=parseInt(el.textContent,10);if(isNaN(to)||calm())return;
+  const t0=performance.now()+700;el.textContent="0";
+  (function f(n){const q=Math.min(1,Math.max(0,(n-t0)/1100));el.textContent=Math.round(to*(1-Math.pow(1-q,3)));if(q<1&&el.isConnected)requestAnimationFrame(f)})(performance.now());
+}
+
+const run=()=>{
+  app.querySelectorAll("svg.pitch:not([data-fx])").forEach(enhancePitch);
+  app.querySelectorAll(".pc .st b").forEach(countUp);
+};
+new MutationObserver(run).observe(app,{childList:true});run();
+
+/* Ondulation au toucher / clic */
+document.addEventListener("pointerdown",e=>{
+  if(calm())return;
+  const t=e.target.closest&&e.target.closest(".btn,.cta,.qb,.seg button,.dot,.lkr,#bar button");
+  if(!t||t.disabled)return;
+  const r=t.getBoundingClientRect(),s=Math.max(r.width,r.height)*2.2,x=document.createElement("span");
+  x.className="rpl";
+  x.style.cssText="width:"+s+"px;height:"+s+"px;left:"+(e.clientX-r.left-s/2)+"px;top:"+(e.clientY-r.top-s/2)+"px";
+  t.appendChild(x);
+  x.addEventListener("animationend",()=>x.remove());setTimeout(()=>x.remove(),900);
+},{passive:true});
+})();
+</script>
+</body></html>
