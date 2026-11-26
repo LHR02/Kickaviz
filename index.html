@@ -510,6 +510,39 @@ svg.pitch{animation:pitchIn .7s cubic-bezier(.2,.9,.3,1) backwards}
 @keyframes ebp{from{transform:scale(.1) rotate(-25deg);opacity:0}}
 .ped{position:absolute;left:50%;top:calc(50% + 126px);width:290px;height:44px;margin-left:-145px;border-radius:50%;background:radial-gradient(ellipse,var(--rc) 0,rgba(0,0,0,.85) 72%);border:3px solid rgba(255,255,255,.7);box-shadow:0 0 50px 10px var(--rc),inset 0 0 22px rgba(255,255,255,.5);animation:pdr .9s cubic-bezier(.2,.9,.3,1)}
 @keyframes pdr{from{transform:scaleX(.1);opacity:0}}
+
+/* ===== Scènes d'action par poste ===== */
+.ha .emb{top:9%}
+.xact{position:absolute;left:50%;top:calc(100% - 54vmin);width:80vmin;height:46vmin;margin-left:-40vmin;z-index:3}
+.xa{position:absolute;display:grid;place-items:center;font-style:normal;animation:xw var(--sd) cubic-bezier(.45,0,.25,1) both}
+@keyframes xw{0%{transform:none}
+30%{transform:translate(var(--x1,0px),var(--y1,0px)) rotate(var(--r1,0deg)) scale(var(--s1,1));opacity:var(--o1,1)}
+65%{transform:translate(var(--x2,0px),var(--y2,0px)) rotate(var(--r2,0deg)) scale(var(--s2,1));opacity:var(--o2,1)}
+100%{transform:translate(var(--x3,0px),var(--y3,0px)) rotate(var(--r3,0deg)) scale(var(--s3,1));opacity:var(--o3,1)}}
+.xb{font-size:5.5vmin;line-height:1;width:6vmin;height:6vmin;z-index:2;filter:drop-shadow(0 .4vmin .6vmin rgba(0,0,0,.55))}
+.xm,.xo,.xt{border-radius:50%;width:9vmin;height:9vmin;font:800 3vmin/1 system-ui,sans-serif;border:.6vmin solid #fff}
+.xm{background:radial-gradient(circle at 35% 30%,#fff,var(--rc) 70%);color:#111;z-index:1;box-shadow:0 0 3vmin var(--rc)}
+.xo{background:radial-gradient(circle at 35% 30%,#fca5a5,#dc2626 70%);width:7.5vmin;height:7.5vmin}
+.xt{background:rgba(255,255,255,.16);border-style:dashed;width:7.5vmin;height:7.5vmin}
+.xg{left:9vmin;top:0;width:62vmin;height:26vmin;border:.9vmin solid #fff;border-bottom:0;border-radius:3px 3px 0 0;animation:none;background:repeating-linear-gradient(45deg,transparent 0 1.2vmin,rgba(255,255,255,.28) 1.2vmin 1.4vmin),repeating-linear-gradient(-45deg,transparent 0 1.2vmin,rgba(255,255,255,.28) 1.2vmin 1.4vmin)}
+.xg.hit{animation:xnet var(--sd) both}
+@keyframes xnet{0%,60%{box-shadow:none}72%{box-shadow:0 0 6vmin 2vmin var(--rc),inset 0 0 5vmin var(--rc);transform:scale(1.04)}100%{box-shadow:0 0 3vmin var(--rc);transform:none}}
+.xl{position:absolute;left:0;width:80vmin;top:-9vmin;text-align:center;font:900 7vmin/1 "Segoe UI",system-ui,sans-serif;color:#fff;letter-spacing:.04em;text-shadow:0 0 3vmin var(--rc),0 .5vmin 0 rgba(0,0,0,.6);animation:xlp var(--sd) both;z-index:4}
+@keyframes xlp{0%,55%{opacity:0;transform:scale(.4)}75%{opacity:1;transform:scale(1.2)}100%{opacity:1;transform:scale(1)}}
+
+/* ===== Tunnel : sol, plafond, joueur qui marche ===== */
+.tun::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.75));pointer-events:none;z-index:3}
+.xpw{position:absolute;left:50%;top:50%;width:0;height:0;z-index:2;animation:xwk var(--wd) cubic-bezier(.35,.1,.65,1) both}
+@keyframes xwk{0%{transform:translateY(0) scale(.08);opacity:0}10%{opacity:1}85%{transform:translateY(40vh) scale(1.35);opacity:1}100%{transform:translateY(46vh) scale(1.7);opacity:0}}
+.xpl{position:absolute;left:-11vmin;bottom:0;width:22vmin;height:44vmin;overflow:visible;fill:#070b16;filter:drop-shadow(0 0 .35vmin var(--tc)) drop-shadow(0 0 2.2vmin var(--tc));animation:xbob .42s ease-in-out infinite}
+@keyframes xbob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-1.2vmin) rotate(1.5deg)}}
+.xlg{animation:xstp .42s ease-in-out infinite alternate}.xlg.r{animation-direction:alternate-reverse}
+@keyframes xstp{from{transform:translateY(0) scaleY(1)}to{transform:translateY(-5px) scaleY(.86)}}
+.xar{fill:#0c1322;animation:xsw .42s ease-in-out infinite alternate}.xar.l{animation-direction:alternate-reverse}
+@keyframes xsw{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.xlg .bt{fill:var(--tc)}
+.xsh{position:absolute;left:-9vmin;top:-1.6vmin;width:18vmin;height:3.4vmin;border-radius:50%;background:radial-gradient(ellipse,var(--tc),transparent 70%);opacity:.8}
+@media (prefers-reduced-motion:reduce){.xpw{display:none}}
 </style><style id="skin">
 :root{--ac:#16a34a;--ac2:#fff;--r:18px;--sh:0 8px 24px rgba(10,40,20,.12);--glow:0 6px 20px rgba(22,163,74,.35)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08110c;--card:#111c15;--ac:#22c55e;--ac2:#04150a;--bd:#243a2b;--sh:0 8px 28px rgba(0,0,0,.45);--glow:0 6px 22px rgba(34,197,94,.3)}}
@@ -1624,9 +1657,33 @@ function tabCards(){
  app.innerHTML=`<div class="sh"><b>🃏 Casier à cartes</b><p>Chaque quiz te donne un joueur connu de ton poste. Plus ta note est haute, plus il est rare !</p></div><p><b>${arr.length}/${all.size}</b> joueurs · <b>${P.cards.filter(c=>!c.b).length}</b> quiz · <button class="btn o" id="tsh">🛒 ${S.lg=="en"?"Shop":"Boutique"}</button></p><div class="alb">${arr.map(c=>{const i=c.p.lastIndexOf(" ");return`<div class="mc ${cl[c.ix]}" data-c="${enc({n:c.p.slice(0,i),f:c.p.slice(i+1),ix:c.ix,k:c.k})}" onclick="vc(this)" style="cursor:pointer"><img class="mp" src="${slug(c.p.slice(0,i))}.jpeg" data-s="${slug(c.p.slice(0,i))}.jpeg" alt="" onerror="PHE(this)"><b style="font-size:1.7rem">${c.p.slice(i+1)}</b><span style="font:800 .78rem/1.15 system-ui">${c.p.slice(0,i)}</span><small>${AB[c.k]} · ${t.tier[c.ix]}</small></div>`}).join("")||`<p class="mu">Aucun joueur pour l’instant : termine un quiz pour ouvrir ta première carte.</p>`}</div><p class="mu">Cartes de joueurs connus. Les photos s’affichent si tu ajoutes les fichiers dans le dossier « photos » de ton dépôt.</p>`;const tb=$("#tsh");if(tb)tb.onclick=tabShop;scrollTo(0,0)}
 function PHE(i){if(!i.dataset.t){i.dataset.t=1;i.src="photos/"+i.dataset.s}else i.remove()}
 const slug=n=>n.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+
+
+const XTS='<svg class="tl2" viewBox="0 0 100 100" preserveAspectRatio="none"><defs><linearGradient id="xfl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" style="stop-color:var(--tc);stop-opacity:.1"/><stop offset="1" style="stop-color:var(--tc);stop-opacity:.6"/></linearGradient><linearGradient id="xcl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".7"/><stop offset="1" style="stop-color:var(--tc);stop-opacity:.15"/></linearGradient></defs><polygon points="0,100 45,52 55,52 100,100" fill="url(#xfl)"/><polygon points="0,0 45,48 55,48 100,0" fill="url(#xcl)"/><path d="M0 90L50 55M100 90L50 55M0 10L50 45M100 10L50 45M0 72L47 54M100 72L53 54M0 28L47 46M100 28L53 46"/></svg>';
+const XPL=d=>`<div class="xpw" style="--wd:${d}ms"><i class="xsh"></i><svg class="xpl" viewBox="0 0 60 120"><defs><linearGradient id="xjs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--tc)"/><stop offset="1" stop-color="#0a0f1c"/></linearGradient></defs><g class="xar l" style="transform-origin:12px 27px"><rect x="7" y="25" width="9" height="32" rx="4.5"/></g><g class="xar r" style="transform-origin:48px 27px"><rect x="44" y="25" width="9" height="32" rx="4.5"/></g><g class="xlg l" style="transform-origin:24px 60px"><rect x="19" y="58" width="10" height="50" rx="5"/><rect x="17" y="106" width="15" height="8" rx="4" class="bt"/></g><g class="xlg r" style="transform-origin:37px 60px"><rect x="32" y="58" width="10" height="50" rx="5"/><rect x="29" y="106" width="15" height="8" rx="4" class="bt"/></g><rect x="17" y="22" width="26" height="40" rx="7" fill="url(#xjs)"/><circle cx="30" cy="12" r="9"/></svg></div>`;
+const XL={G:"ARRÊT !",D:"TACLE !",LD:"CENTRE !",LG:"CENTRE !",MDC:"INTERCEPTION !",M:"PASSE !",MOC:"PASSE DÉCISIVE !",ALD:"DRIBBLE !",ALG:"DRIBBLE !",A:"TÊTE… BUT !",BU:"BUUUT !"};
+function ACT(k,SD,ab){
+ const s=(k=="LG"||k=="ALG")?-1:1,X=l=>s>0?l:74-l,
+ w=a=>a.map((v,i)=>`--x${i+1}:${v[0]*s}vmin;--y${i+1}:${v[1]}vmin;--s${i+1}:${v[2]||1};--r${i+1}:${(v[3]||0)*s}deg;--o${i+1}:${v[4]??1}`).join(";"),
+ e=(c,h,l,t,a)=>`<i class="xa ${c}" style="left:${X(l)}vmin;top:${t}vmin;${a?w(a):""}">${h}</i>`,
+ B=(l,t,a)=>e("xb","⚽",l,t,a),M=(l,t,a,h)=>e("xm",h||ab,l,t,a),O=(l,t,a)=>e("xo","",l,t,a),T=(l,t,a)=>e("xt","",l,t,a),
+ G=c=>`<i class="xa xg ${c||""}"></i>`,
+ sc={
+  G:()=>G()+O(35,40,[[2,-3],[0,0],[0,0]])+M(36,8,[[24,-6,1.3,50],[24,-6,1.3,50],[24,-6,1.3,50]],"🧤")+B(38,37,[[22,-31,.6],[-2,-16,.8],[-14,3]]),
+  D:()=>O(4,30,[[22,-2],[28,0],[28,6,1,80]])+B(7,33,[[22,-2],[26,-3],[60,-36,.5,0,0]])+M(62,30,[[0,0],[-26,0,1.15,-25],[-26,0,1.15,-25]]),
+  LD:()=>G()+M(66,38,[[0,-14],[0,-24],[0,-24]])+B(62,40,[[0,-14],[0,-24],[-26,-34,.55]]),
+  MDC:()=>O(4,30)+O(66,28)+M(34,34,[[2,-2],[3,-6],[3,-26]])+B(8,32,[[26,-1],[27,-5],[30,-28,.8]]),
+  M:()=>T(8,14)+T(64,10)+M(36,34,[[0,0],[4,-14],[8,-20]])+B(39,37,[[-30,-22],[3,-17],[26,-28]]),
+  MOC:()=>G()+O(22,18,[[1,0],[2,0],[3,0]])+O(50,18,[[-1,0],[-2,0],[-3,0]])+T(35,26,[[0,0],[0,-8],[0,-20]])+M(34,36,[[0,-3],[0,-4],[0,-4]])+B(37,38,[[0,-6],[0,-8],[0,-34,.8]]),
+  ALD:()=>G("hit")+O(50,22,[[0,0],[-3,1],[-3,2,1,70]])+M(64,36,[[-4,-6],[-12,-10],[-20,-14]])+B(61,39,[[-4,-6],[-14,-12],[-24,-34,.6]]),
+  A:()=>G("hit")+O(44,22,[[0,0],[0,2],[0,2]])+M(34,24,[[0,0],[0,-8,1.2],[0,-3]])+B(68,38,[[-14,-30,.9],[-30,-20,.7],[-28,-32,.5]]),
+  BU:()=>G("hit")+O(35,8,[[0,0],[-14,-2,1,-50],[-14,-2,1,-50]])+M(34,34,[[0,0],[1,-2],[0,-1]])+B(37,38,[[-1,-12],[16,-32,.6],[16,-32,.6]])
+ };
+ sc.LG=sc.LD;sc.ALG=sc.ALD;
+ return `<div class="xact" style="--sd:${SD}ms">${(sc[k]||sc.M)()}<b class="xl">${XL[k]||""}</b></div>`}
 function packAnim(force){
  const p=st.pc,k=st.k,ix=p.ix,col=["#cd7f32","#c0c8d0","#ff9f1c","#ffe9a8"][ix],pk=$("#pk"),t=T(),tm=[],sl=slug(p.n),d=ix==3?700:0;
- pk.className="t"+ix;pk.hidden=false;pk.style.setProperty("--rc",col);pk.style.setProperty("--tc",ACS[S.ac]||"#16a34a");{const SPK=[["#a0522d","#e11d48"],["#cbd5e1","#f5c542"],["#ffe14d","#f5a300"],["#ffffff","#ffd76a"]][ix];pk.style.setProperty("--s1",SPK[0]);pk.style.setProperty("--s2",SPK[1])}
+ pk.className="t"+ix;pk.hidden=false;pk.style.setProperty("--rc",col);pk.style.setProperty("--tc",col);{const SPK=[["#a0522d","#e11d48"],["#cbd5e1","#f5c542"],["#ffe14d","#f5a300"],["#ffffff","#ffd76a"]][ix];pk.style.setProperty("--s1",SPK[0]);pk.style.setProperty("--s2",SPK[1])}
  pk.innerHTML=`<div class="sc"></div><div class="pkst"><div class="lite"><i></i><i></i><i></i></div></div><button class="pkskip">Passer ▸▸</button><button class="pkmu" onclick="event.stopPropagation();SND.tog(this)">${SND.on()?"🔊":"🔇"}</button>`;
  const show=h=>{$(".pkst").innerHTML=h},close=()=>{tm.forEach(clearTimeout);SND.stop();pk.hidden=true;pk.innerHTML="";if(window.PQ&&PQ.length){const n=PQ.shift();st=Object.assign({},st,{k:n.k,pc:n.pp});setTimeout(()=>packAnim(true),250)}},flash=()=>{pk.classList.remove("fl");void pk.offsetWidth;pk.classList.add("fl")},q=(f,ms)=>tm.push(setTimeout(f,ms)),
  sp=Array.from({length:ix==3?45:ix==2?18:ix==1?10:5},()=>`<i class="sp" style="left:${Math.random()*100}%;bottom:-10px;animation-delay:${Math.random()*2}s"></i>`).join(""),
@@ -1637,9 +1694,9 @@ function packAnim(force){
  rg=()=>pk.insertAdjacentHTML("beforeend",'<i class="ring" onanimationend="this.remove()"></i><i class="ring" style="animation-delay:.25s" onanimationend="this.remove()"></i><i class="ring" style="animation-delay:.5s" onanimationend="this.remove()"></i>');
  const sx=S.ra==1?0:ix,TT=[1.2,1.7,2.1,2.6][sx],TD=TT*1000+300,SD=[900,1500,2100,2800][sx],T0=sx?900:600,
  sc=()=>pk.querySelector(".sc"),
- tun=()=>{sc().innerHTML=`<div class="tun" style="--tt:${TT}s"><svg class="tl2" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 90L50 55M100 90L50 55M0 10L50 45M100 10L50 45"/></svg>${Array.from({length:9},(_,i)=>`<div class="fr" style="--i:${i}"><i class="st a"></i><i class="st b"></i></div>`).join("")}<div class="fgl" style="animation-duration:${TD}ms"></div><div class="ex">${p.f}</div></div>`},
+ tun=()=>{sc().innerHTML=`<div class="tun" style="--tt:${TT}s">${XTS}${Array.from({length:9},(_,i)=>`<div class="fr" style="--i:${i}"><i class="st a"></i><i class="st b"></i></div>`).join("")}<div class="fgl" style="animation-duration:${TD}ms"></div><div class="ex">${p.f}</div>${XPL(TD)}</div>`},
  fz=c=>Array.from({length:[10,16,24,36][sx]},()=>`<i class="fz" style="--dx:${((Math.random()-.5)*120+(c=="l"?40:-40))|0}px;--dy:-${(120+Math.random()*(160+sx*50))|0}px;animation-delay:${(Math.random()*1.1).toFixed(2)}s"></i>`).join(""),
- std=()=>{const tx=`KICKAVIZ ★ ${pn(k).toUpperCase()} ★ ${t.tier[ix].toUpperCase()} ★ `;sc().innerHTML=`<div class="std"><div class="crowd c1"></div><div class="crowd c2"></div><div class="tw">${Array.from({length:34},()=>`<i style="left:${Math.random()*100}%;top:${14+Math.random()*44}%;animation-delay:${(Math.random()*1.4).toFixed(2)}s"></i>`).join("")}</div><div class="led"><span>${tx.repeat(8)}</span></div><div class="grass"></div><div class="cone l"></div><div class="cone r"></div><div class="fnt l">${fz("l")}</div><div class="fnt r">${fz("r")}</div><div class="emb"><b>${p.f}</b></div></div>`},
+ std=()=>{const tx=`KICKAVIZ ★ ${pn(k).toUpperCase()} ★ ${t.tier[ix].toUpperCase()} ★ `;sc().innerHTML=`<div class="std ha"><div class="crowd c1"></div><div class="crowd c2"></div><div class="tw">${Array.from({length:34},()=>`<i style="left:${Math.random()*100}%;top:${14+Math.random()*44}%;animation-delay:${(Math.random()*1.4).toFixed(2)}s"></i>`).join("")}</div><div class="led"><span>${tx.repeat(8)}</span></div><div class="grass"></div><div class="cone l"></div><div class="cone r"></div><div class="fnt l">${fz("l")}</div><div class="fnt r">${fz("r")}</div><div class="emb"><b>${p.f}</b></div>${ACT(k,SD,AB[k])}</div>`},
  ped=()=>{const e=pk.querySelector(".emb");if(e)e.remove();if(!pk.querySelector(".ped")&&sc())sc().insertAdjacentHTML("beforeend",'<div class="ped"></div>')};
  if(S.ra!=2)SND.pack(sx);
  if(S.ra==2){q(card,50)}
